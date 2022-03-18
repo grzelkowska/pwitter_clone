@@ -1,11 +1,35 @@
+import { AuthService } from "fbase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import React, { useState } from "react";
 
 const AuthForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(false);
-  const onSubmit = (event) => {
+  const [error, setError] = useState("")
+  const onSubmit = async (event) => {
     event.preventDefault();
+    try {
+      let data;
+      if (newAccount) {
+        const data = await createUserWithEmailAndPassword(
+          AuthService,
+          email,
+          password
+        );
+      } else {
+        const data = await signInWithEmailAndPassword(
+          AuthService,
+          email,
+          password
+        );
+      }
+    } catch (e) {
+      setError(e.message.replace("Firebase: ", ""))
+    }
   };
   const onChange = (event) => {
     const {
@@ -42,6 +66,7 @@ const AuthForm = () => {
           type="submit"
           value={newAccount ? "Create A New Account" : "Log In"}
         />
+        {error}
       </form>
       <span onClick={toggleAccount}>
         {newAccount ? "Log In" : "Create A New Account"}
