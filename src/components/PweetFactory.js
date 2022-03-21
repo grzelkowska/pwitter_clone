@@ -32,7 +32,6 @@ const PweetFactory = ({ userObj }) => {
     let attachmentUrl = "";
     if (attachment !== "") {
       const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-      console.log(attachmentRef);
       await uploadString(attachmentRef, attachment, "data_url");
       attachmentUrl = await getDownloadURL(ref(storageService, attachmentRef));
     }
