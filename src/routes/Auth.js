@@ -5,11 +5,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { AuthService } from "fbase";
+import { authService } from "fbase";
 
 const Auth = () => {
   const onSocialClick = async (event) => {
-    console.log(event);
     const {
       target: { name },
     } = event;
@@ -19,7 +18,7 @@ const Auth = () => {
     } else if (name === "github") {
       provider = new GithubAuthProvider();
     }
-    await signInWithPopup(AuthService, provider);
+    await signInWithPopup(authService, provider);
   };
   return (
     <div>
