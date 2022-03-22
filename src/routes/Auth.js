@@ -20,6 +20,7 @@ const Auth = () => {
     }
     await signInWithPopup(authService, provider);
   };
+
   return (
     <div>
       <AuthForm />

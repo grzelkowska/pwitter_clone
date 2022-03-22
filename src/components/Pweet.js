@@ -20,6 +20,7 @@ const Pweet = ({ pweetObj, isOwner }) => {
     });
     setEditing(false);
   };
+
   const onDeleteClick = async () => {
     const ok = window.confirm("Are you sure to delete this pweet?");
     if (ok) {
@@ -29,6 +30,7 @@ const Pweet = ({ pweetObj, isOwner }) => {
       }
     }
   };
+
   return (
     <div>
       {editing ? (

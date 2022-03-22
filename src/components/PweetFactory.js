@@ -51,6 +51,7 @@ const PweetFactory = ({ userObj }) => {
   const onClearAttachment = () => {
     setAttachment("");
   };
+
   return (
     <form onSubmit={onSubmit}>
       <input
