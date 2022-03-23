@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Auth from "routes/Auth";
+import EditProfile from "routes/EditProfile";
 import Navigation from "components/Navigation";
 
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
@@ -25,13 +26,23 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
               <Route
                 exact
                 path="/"
-                element={<Home userObj={userObj} />}
+                element={
+                  <Home
+                    userObj={userObj}
+                    // pweetObj={pweetObj}
+                  />
+                }
               ></Route>
               <Route
                 exact
                 path="/profile"
+                element={<Profile userObj={userObj} />}
+              ></Route>
+              <Route
+                exact
+                path="/editProfile"
                 element={
-                  <Profile refreshUser={refreshUser} userObj={userObj} />
+                  <EditProfile refreshUser={refreshUser} userObj={userObj} />
                 }
               ></Route>
             </>

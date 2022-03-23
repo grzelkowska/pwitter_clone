@@ -1,32 +1,24 @@
+import Pweet from "components/Pweet";
 import { authService, dbService } from "fbase";
-import { updateProfile } from "firebase/auth";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Profile = ({ userObj, refreshUser }) => {
-  const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-  const onChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setNewDisplayName(value);
-  };
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    console.log(userObj);
-    if (userObj.displayName !== newDisplayName) {
-      await updateProfile(authService.currentUser, {
-        displayName: newDisplayName,
-      });
-    }
-    refreshUser();
-  };
-
+const Profile = ({ userObj }) => {
+  const [ownPweets, setOwnPweets] = useState([]);
   const navigate = useNavigate();
   const onLogOutClick = () => {
     authService.signOut();
     navigate("/");
+  };
+  const onEditProfileClick = () => {
+    navigate("/editProfile");
   };
 
   const getMyPweets = async () => {
@@ -35,9 +27,12 @@ const Profile = ({ userObj, refreshUser }) => {
       orderBy("createdAt", "desc"),
       where("creatorId", "==", `${userObj.uid}`)
     );
-    const queryPweets = await getDocs(q);
-    queryPweets.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data(), "queryPweets");
+    onSnapshot(q, (snapshot) => {
+      const pweetArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setOwnPweets(pweetArr);
     });
   };
   useEffect(() => {
@@ -46,26 +41,20 @@ const Profile = ({ userObj, refreshUser }) => {
 
   return (
     <div className="container">
-      <form onSubmit={onSubmit} className="profileForm">
-        <input
-          type="text"
-          autoFocus
-          value={newDisplayName}
-          onChange={onChange}
-          placeholder="New Display Name"
-          className="formInput"
-        />
-        <input
-          type="submit"
-          value="Update Profile"
-          className="formBtn"
-          style={{ marginTop: 10 }}
-        />
-      </form>
-
+      <img className="profile__img" src={userObj.profileImg} />
+      <span className="formBtn" onClick={onEditProfileClick}>
+        Edit Profile
+      </span>
       <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
         Log Out
       </span>
+      {ownPweets.map((pweet) => (
+        <Pweet
+          key={pweet.id}
+          pweetObj={pweet}
+          isOwner={pweet.creatorId === userObj.uid}
+        />
+      ))}
     </div>
   );
 };

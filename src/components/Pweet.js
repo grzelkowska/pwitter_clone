@@ -8,6 +8,7 @@ import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 const Pweet = ({ pweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newPweet, setNewPweet] = useState(pweetObj.text);
+  const [imgClicked, setImgClicked] = useState(false);
   const toggleEditing = () => setEditing((prev) => !prev);
   const onChangeEdit = (event) => {
     const {
@@ -31,6 +32,9 @@ const Pweet = ({ pweetObj, isOwner }) => {
         await deleteObject(ref(storageService, pweetObj.attachmentUrl));
       }
     }
+  };
+  const onImageClick = () => {
+    setImgClicked((prev) => !prev);
   };
 
   return (
@@ -61,20 +65,32 @@ const Pweet = ({ pweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{pweetObj.text}</h4>
-          {pweetObj.attachmentUrl && <img src={pweetObj.attachmentUrl} />}
+          {pweetObj.attachmentUrl && (
+            <img
+              className="nweet_img"
+              src={pweetObj.attachmentUrl}
+              onClick={onImageClick}
+            />
+          )}
+          {imgClicked && (
+            <dialog
+              className="dialog"
+              onClick={onImageClick}
+              open
+              style={{ position: "absolute" }}
+            >
+              <img className="image" src={pweetObj.attachmentUrl} />
+            </dialog>
+          )}
           {isOwner && (
             <div className="nweet__actions">
-              <span onClick={onDeleteClick}>
-                <FontAwesomeIcon icon={faTrash} />
-              </span>
               <span onClick={toggleEditing}>
                 <FontAwesomeIcon icon={faPencilAlt} />
               </span>
+              <span onClick={onDeleteClick}>
+                <FontAwesomeIcon icon={faTrash} />
+              </span>
             </div>
-            // <>
-            //   <button onClick={toggleEditing}>Edit</button>
-            //   <button onClick={onDeleteClick}>Delete</button>
-            // </>
           )}
         </>
       )}

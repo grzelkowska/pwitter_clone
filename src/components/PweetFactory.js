@@ -69,7 +69,7 @@ const PweetFactory = ({ userObj }) => {
           onChange={onChange}
         />
 
-        <input type="submit" value="&rarr;" />
+        <input type="submit" value="&rarr;" className="factory_arrow"/>
       </div>
       <label htmlFor="attach-file" className="factoryInput__label">
         <span>Add photos</span>
@@ -83,7 +83,7 @@ const PweetFactory = ({ userObj }) => {
         style={{ opacity: 0 }}
       />
       {attachment && (
-        <div className="factoryForm_attachment">
+        <div className="factoryForm__attachment">
           <img src={attachment} style={{ backgroundImage: attachment }} />
           <div className="factoryForm__clear" onClick={onClearAttachment}>
             <span>Remove</span>

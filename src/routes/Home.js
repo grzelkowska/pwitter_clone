@@ -22,6 +22,7 @@ const Home = ({ userObj }) => {
 
   return (
     <div className="container">
+      <img className="profile__img" src={userObj.profileImg} />
       <PweetFactory userObj={userObj} />
       <div style={{ marginTop: 30 }}>
         {pweets.map((pweet) => (

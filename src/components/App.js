@@ -1,7 +1,9 @@
-import { authService } from "fbase";
+import { authService, dbService } from "fbase";
 import { updateProfile } from "firebase/auth";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import AppRouter from "./Router";
+import blankProfile from "../img/blank-profile.png";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -12,6 +14,7 @@ function App() {
         setUserObj({
           displayName: user.displayName,
           uid: user.uid,
+          profileImg: blankProfile,
           updateProfile: () =>
             updateProfile(user, { displayName: user.displayName }),
         });
@@ -21,12 +24,27 @@ function App() {
       setInit(true);
     });
   }, []);
+  const [pweets, setPweets] = useState([]);
+  useEffect(() => {
+    const q = query(
+      collection(dbService, "pweets"),
+      orderBy("createdAt", "desc")
+    );
+    onSnapshot(q, (snapshot) => {
+      const pweetArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setPweets(pweetArr);
+    });
+  }, []);
 
   const refreshUser = () => {
     const user = authService.currentUser;
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
+      profileImg: blankProfile,
       updateProfile: () =>
         updateProfile(user, { displayName: user.displayName }),
     });
@@ -39,12 +57,15 @@ function App() {
           userObj={userObj}
           refreshUser={refreshUser}
           isLoggedIn={Boolean(userObj)}
+          pweetObj={pweets}
         />
       ) : (
         "Initializing"
       )}
       <br></br>
-      <footer>&copy; {new Date().getFullYear()} Pwitter</footer>
+      <footer className="footer">
+        &copy; {new Date().getFullYear()} Pwitter
+      </footer>
     </>
   );
 }

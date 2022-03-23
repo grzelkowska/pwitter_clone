@@ -79,9 +79,18 @@ form {
   display: flex;
   flex-direction: column;
 }
+.profile__img {
+  height: 80px;
+  width: 80px;
+  border-radius: 40px;
+  align-self: center;
+  margin-bottom: 20px;
+  margin-top: -50px;
+}
 
 .logOut {
-  margin-top: 50px;
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 
 /* Nwitter Factory */
@@ -101,15 +110,18 @@ form {
   position: relative;
   margin-bottom: 20px;
   width: 100%;
-  border: 1px solid #04aaff;
+  /* border: 1px solid #04aaff; */
+}
+.factory_arrow {
+  font-size: xx-large;
 }
 
-.factoryInput__input {
+.factoryInput_input {
   flex-grow: 1;
   height: 40px;
   padding: 0px 20px;
   color: white;
-  /* border: 1px solid #04aaff; */
+  border: 1px solid #04aaff;
   border-radius: 20px;
   font-weight: 500;
   font-size: 12px;
@@ -185,7 +197,7 @@ form {
   font-size: 14px;
 }
 
-.nweet img {
+.nweet_img {
   right: -10px;
   top: 20px;
   position: absolute;
@@ -193,6 +205,17 @@ form {
   width: 50px;
   height: 50px;
   margin-top: 10px;
+}
+.image {
+  width: 450px;
+}
+.dialog {
+  box-shadow: 0 8px 6px -6px black;
+  position: static;
+  left: -25%;
+  top: 10%;
+  z-index: 1;
+  border-radius: 10px;
 }
 
 .nweet__actions {
@@ -214,7 +237,7 @@ form {
 .authContainer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 70vh;
   justify-content: center;
   align-items: center;
 }
@@ -274,4 +297,11 @@ form {
   display: block;
   font-size: 12px;
   text-decoration: underline;
+}
+
+.footer {
+  position: sticky;
+  bottom: 25px;
+  text-align: center;
+  width: 100%;
 }
