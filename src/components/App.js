@@ -1,6 +1,12 @@
 import { authService, dbService } from "fbase";
 import { updateProfile } from "firebase/auth";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import AppRouter from "./Router";
 import blankProfile from "../img/blank-profile.png";
@@ -9,14 +15,20 @@ function App() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
+
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUserObj({
           displayName: user.displayName,
           uid: user.uid,
-          profileImg: blankProfile,
+          photoURL: user.photoURL ? user.photoURL : blankProfile,
+          // photoURL: null ? blankProfile : user.photoURL,
+          // photoURL: user.photoURL,
           updateProfile: () =>
-            updateProfile(user, { displayName: user.displayName }),
+            updateProfile(user, {
+              displayName: user.displayName,
+              photoURL: user.photoURL,
+            }),
         });
       } else {
         setUserObj(null);
@@ -44,9 +56,14 @@ function App() {
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
-      profileImg: blankProfile,
+      // photoURL: user.photoURL,
+      photoURL: user.photoURL ? user.photoURL : blankProfile,
+      // photoURL: null ? blankProfile : user.photoURL,
       updateProfile: () =>
-        updateProfile(user, { displayName: user.displayName }),
+        updateProfile(user, {
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        }),
     });
   };
 

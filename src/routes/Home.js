@@ -19,10 +19,10 @@ const Home = ({ userObj }) => {
       setPweets(pweetArr);
     });
   }, []);
-
+  
   return (
     <div className="container">
-      <img className="profile__img" src={userObj.profileImg} />
+      <img className="profile__img" src={userObj.photoURL} />
       <PweetFactory userObj={userObj} />
       <div style={{ marginTop: 30 }}>
         {pweets.map((pweet) => (

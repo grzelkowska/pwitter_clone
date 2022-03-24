@@ -68,8 +68,7 @@ const PweetFactory = ({ userObj }) => {
           value={pweet}
           onChange={onChange}
         />
-
-        <input type="submit" value="&rarr;" className="factory_arrow"/>
+        <input type="submit" value="&rarr;" className="factory_arrow" />
       </div>
       <label htmlFor="attach-file" className="factoryInput__label">
         <span>Add photos</span>

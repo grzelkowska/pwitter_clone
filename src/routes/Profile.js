@@ -41,7 +41,7 @@ const Profile = ({ userObj }) => {
 
   return (
     <div className="container">
-      <img className="profile__img" src={userObj.profileImg} />
+      <img className="profile__img" src={userObj.photoURL} />
       <span className="formBtn" onClick={onEditProfileClick}>
         Edit Profile
       </span>
