@@ -15,15 +15,12 @@ function App() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
-
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUserObj({
-          displayName: user.displayName,
+          displayName: user.displayName ? user.displayName : "User",
           uid: user.uid,
           photoURL: user.photoURL ? user.photoURL : blankProfile,
-          // photoURL: null ? blankProfile : user.photoURL,
-          // photoURL: user.photoURL,
           updateProfile: () =>
             updateProfile(user, {
               displayName: user.displayName,
@@ -56,9 +53,7 @@ function App() {
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
-      // photoURL: user.photoURL,
       photoURL: user.photoURL ? user.photoURL : blankProfile,
-      // photoURL: null ? blankProfile : user.photoURL,
       updateProfile: () =>
         updateProfile(user, {
           displayName: user.displayName,

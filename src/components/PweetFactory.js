@@ -46,6 +46,8 @@ const PweetFactory = ({ userObj }) => {
         createdAt: Date.now(),
         creatorId: userObj.uid,
         attachmentUrl,
+        userID: userObj.displayName,
+        profileImg: userObj.photoURL,
       });
     } catch (error) {
       console.log(`Error adding document: ${error}`);

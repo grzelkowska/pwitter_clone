@@ -64,6 +64,8 @@ const Pweet = ({ pweetObj, isOwner }) => {
         </>
       ) : (
         <>
+          <img className="nweet_profile_img" src={pweetObj.profileImg} />
+          <span className="userID">{pweetObj.userID}</span>
           <h4>{pweetObj.text}</h4>
           {pweetObj.attachmentUrl && (
             <img

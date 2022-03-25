@@ -1,6 +1,11 @@
 import { authService, storageService } from "fbase";
 import { updateProfile } from "firebase/auth";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadString,
+} from "firebase/storage";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,6 +35,21 @@ const EditProfile = ({ userObj, refreshUser }) => {
         ref(storageService, newProfileImageRef)
       );
     }
+
+    const oldProfilePicString = userObj.photoURL
+      .replace("%2F", " ")
+      .replace("?alt=media&token=", " ")
+      .split(" ");
+    const deleteRef = ref(
+      storageService,
+      `${userObj.uid}/${oldProfilePicString[1]}`
+    );
+    deleteObject(deleteRef)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+
     await updateProfile(authService.currentUser, {
       photoURL: newProfileImageUrl,
       displayName: newDisplayName,

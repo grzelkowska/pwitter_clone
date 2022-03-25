@@ -19,7 +19,7 @@ const Home = ({ userObj }) => {
       setPweets(pweetArr);
     });
   }, []);
-  
+  // console.log(pweets)
   return (
     <div className="container">
       <img className="profile__img" src={userObj.photoURL} />
