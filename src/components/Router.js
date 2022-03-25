@@ -4,6 +4,7 @@ import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Auth from "routes/Auth";
 import EditProfile from "routes/EditProfile";
+import UserProfile from "routes/UserProfile";
 import Navigation from "components/Navigation";
 
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
@@ -26,12 +27,7 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
               <Route
                 exact
                 path="/"
-                element={
-                  <Home
-                    userObj={userObj}
-                    // pweetObj={pweetObj}
-                  />
-                }
+                element={<Home userObj={userObj} />}
               ></Route>
               <Route
                 exact
@@ -44,6 +40,11 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
                 element={
                   <EditProfile refreshUser={refreshUser} userObj={userObj} />
                 }
+              ></Route>
+              <Route
+                exact
+                path="/userProfile"
+                element={<UserProfile />}
               ></Route>
             </>
           ) : (

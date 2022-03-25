@@ -370,3 +370,45 @@ form {
 .userID {
   color: #04aaff;
 }
+/* userProfile */
+.userProfile__form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  margin-bottom: 40px;
+  width: 100%;
+}
+.userProfile__form input {
+  flex-grow: 1;
+  height: 40px;
+  padding: 0px 20px;
+  color: white;
+  border: 1px solid #04aaff;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 12px;
+}
+.userProfile__form span {
+  cursor: pointer;
+}
+.maginifyGlass {
+  font-size: x-large;
+  margin-top: 7px;
+  margin-left: 5px;
+}
+.userProfile_container {
+  margin-top: -30px;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+.userProfile_profile_img {
+  height: 90px;
+  width: 90px;
+  border-radius: 45px;
+  align-self: center;
+  margin-bottom: 20px;
+  margin-top: -20px;
+}

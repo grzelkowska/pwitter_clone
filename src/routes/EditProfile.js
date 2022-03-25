@@ -22,7 +22,6 @@ const EditProfile = ({ userObj, refreshUser }) => {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(userObj);
 
     let newProfileImageUrl = "";
     if (newProfileImage !== "") {
@@ -34,26 +33,34 @@ const EditProfile = ({ userObj, refreshUser }) => {
       newProfileImageUrl = await getDownloadURL(
         ref(storageService, newProfileImageRef)
       );
+      await updateProfile(authService.currentUser, {
+        photoURL: newProfileImageUrl,
+        displayName: newDisplayName,
+      });
+    } else if (newProfileImage === "") {
+      await updateProfile(authService.currentUser, {
+        displayName: newDisplayName,
+      });
     }
 
-    const oldProfilePicString = userObj.photoURL
-      .replace("%2F", " ")
-      .replace("?alt=media&token=", " ")
-      .split(" ");
-    const deleteRef = ref(
-      storageService,
-      `${userObj.uid}/${oldProfilePicString[1]}`
-    );
-    deleteObject(deleteRef)
-      .then(() => {})
-      .catch((error) => {
-        console.log(error);
-      });
+    // const oldProfilePicString = userObj.photoURL
+    //   .replace("%2F", " ")
+    //   .replace("?alt=media&token=", " ")
+    //   .split(" ");
+    // const deleteRef = ref(
+    //   storageService,
+    //   `${userObj.uid}/${oldProfilePicString[1]}`
+    // );
+    // deleteObject(deleteRef)
+    //   .then(() => {})
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-    await updateProfile(authService.currentUser, {
-      photoURL: newProfileImageUrl,
-      displayName: newDisplayName,
-    });
+    // await updateProfile(authService.currentUser, {
+    //   photoURL: newProfileImageUrl,
+    //   displayName: newDisplayName,
+    // });
     setNewProfileImage("");
     refreshUser();
   };

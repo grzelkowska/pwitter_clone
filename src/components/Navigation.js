@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = ({ userObj }) => {
   return (
@@ -30,6 +31,15 @@ const Navigation = ({ userObj }) => {
                 ? `${userObj.displayName}의 Profile`
                 : "Profile"}
             </span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/userProfile" style={{ marginLeft: 10 }}>
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              color={"#04AAFF"}
+              size="2x"
+            />
           </Link>
         </li>
       </ul>

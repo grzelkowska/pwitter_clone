@@ -38,6 +38,9 @@ const Profile = ({ userObj }) => {
   useEffect(() => {
     getMyPweets();
   }, []);
+  useEffect(() => {
+    return () => setOwnPweets([]);
+  }, []);
 
   return (
     <div className="container">
