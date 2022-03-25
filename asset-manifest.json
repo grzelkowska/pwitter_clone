@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/pwitter_clone/static/css/main.aa8682f7.css",
+    "main.js": "/pwitter_clone/static/js/main.317fb79d.js",
+    "static/media/blank-profile.png": "/pwitter_clone/static/media/blank-profile.c3f945216dc12c9498dc.png",
+    "index.html": "/pwitter_clone/index.html",
+    "main.aa8682f7.css.map": "/pwitter_clone/static/css/main.aa8682f7.css.map",
+    "main.317fb79d.js.map": "/pwitter_clone/static/js/main.317fb79d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aa8682f7.css",
+    "static/js/main.317fb79d.js"
+  ]
+}
